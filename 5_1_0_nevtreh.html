@@ -1,0 +1,60 @@
+<!-- Бүртгүүлэх хэсгийг navbar-д нэмнэ -->
+
+
+<li class="nav-item">
+  <a class="nav-link btn btn-login" href="#" id="registerToggle">Бүртгүүлэх</a>
+</li>
+
+<!-- Бүртгүүлэх modal -->
+<div id="registerModal" class="modal">
+  <div class="modal-content" style="max-width: 500px;">
+    <span class="close-modal" onclick="closeModal('registerModal')">&times;</span>
+    <div class="auth-form">
+      <h2>Бүртгүүлэх</h2>
+      <p>Шинэ хэрэглэгч бол бүртгүүлнэ үү</p>
+      
+      <form id="registerForm">
+        <div class="form-group">
+          <label for="regName">Бүтэн нэр</label>
+          <input type="text" id="regName" name="name" required>
+          <i class="fas fa-user"></i>
+        </div>
+        
+        <div class="form-group">
+          <label for="regEmail">Имэйл хаяг</label>
+          <input type="email" id="regEmail" name="email" required>
+          <i class="fas fa-envelope"></i>
+        </div>
+        
+        <div class="form-group">
+          <label for="regPhone">Утасны дугаар</label>
+          <input type="tel" id="regPhone" name="phone" required>
+          <i class="fas fa-phone"></i>
+        </div>
+        
+        <div class="form-group">
+          <label for="regPassword">Нууц үг</label>
+          <input type="password" id="regPassword" name="password" required>
+          <i class="fas fa-lock"></i>
+        </div>
+        
+        <div class="form-group">
+          <label for="regConfirmPassword">Нууц үг давтах</label>
+          <input type="password" id="regConfirmPassword" required>
+          <i class="fas fa-lock"></i>
+        </div>
+        
+        <div class="form-group checkbox-group">
+          <input type="checkbox" id="regTerms" required>
+          <label for="regTerms">Би <a href="/terms.html">Үйлчилгээний нөхцөл</a> болон <a href="/privacy.html">Нууцлалын бодлого</a>-ыг зөвшөөрч байна</label>
+        </div>
+        
+        <button type="submit" class="btn-auth">Бүртгүүлэх</button>
+        
+        <div class="auth-footer">
+          <p>Бүртгэлтэй юу? <a href="#" onclick="switchToLogin()">Нэвтрэх</a></p>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

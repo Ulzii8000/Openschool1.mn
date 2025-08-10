@@ -1,0 +1,870 @@
+<!DOCTYPE html>
+<html lang="mn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Open school | Сургалтын төв ">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+  <title>Open school | Сургалтын төв </title>
+  <style>
+    :root {
+      --primary: #4a6bff;
+      --secondary: #ff6b6b;
+      --dark: #2c3e50;
+      --light: #f8f9fa;
+      --gray: #6c757d;
+      --success: #28a745;
+      --warning: #ffc107;
+      --danger: #dc3545;
+      --font-heading: 'Montserrat', sans-serif;
+      --font-body: 'Roboto', sans-serif;
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: var(--font-body);
+      color: var(--dark);
+      line-height: 1.6;
+      background-color: #fff;
+    }
+    
+    .container {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+    
+    /* Navigation */
+    .navbar {
+      background-color: #fff;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 1000;
+      transition: all 0.3s ease;
+    }
+    
+    .navbar-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 0;
+    }
+    
+    .logo {
+      height: 50px;
+      width: auto;
+    }
+    
+    .menu-toggle {
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      color: var(--dark);
+      cursor: pointer;
+      display: none;
+    }
+    
+    .nav-links {
+      display: flex;
+      align-items: center;
+    }
+    
+    .nav-menu {
+      display: flex;
+      list-style: none;
+    }
+    
+    .nav-item {
+      position: relative;
+      margin-left: 20px;
+    }
+    
+    .nav-link {
+      text-decoration: none;
+      color: var(--dark);
+      font-weight: 500;
+      font-family: var(--font-heading);
+      transition: color 0.3s;
+      padding: 10px 0;
+      position: relative;
+    }
+    
+    .nav-link:hover, .nav-link.current {
+      color: var(--primary);
+    }
+    
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      background: var(--primary);
+      bottom: 0;
+      left: 0;
+      transition: width 0.3s;
+    }
+    
+    .nav-link:hover::after, .nav-link.current::after {
+      width: 100%;
+    }
+    
+    .dropdown-menu {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background: #fff;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      border-radius: 5px;
+      padding: 10px 0;
+      min-width: 200px;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s;
+      z-index: 100;
+    }
+    
+    .nav-item:hover .dropdown-menu {
+      opacity: 1;
+      visibility: visible;
+    }
+    
+    .dropdown-item {
+      padding: 8px 20px;
+      display: block;
+      color: var(--dark);
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+    
+    .dropdown-item:hover {
+      background: #f8f9fa;
+      color: var(--primary);
+      padding-left: 25px;
+    }
+    
+    .social-links {
+      display: flex;
+      margin-left: 30px;
+    }
+    
+    .social-link {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: #f1f1f1;
+      color: var(--dark);
+      margin-left: 10px;
+      transition: all 0.3s;
+    }
+    
+    .social-link:hover {
+      background: var(--primary);
+      color: #fff;
+      transform: translateY(-3px);
+    }
+    
+    /* Hero Section */
+    .hero {
+      height: 80vh;
+      background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('img/hero-bg.jpg') no-repeat center center/cover;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      text-align: center;
+      padding-top: 80px;
+    }
+    
+    .hero-content {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    
+    .hero h1 {
+      font-size: 3rem;
+      margin-bottom: 20px;
+      font-family: var(--font-heading);
+    }
+    
+    .hero p {
+      font-size: 1.2rem;
+      margin-bottom: 30px;
+    }
+    
+    .btn {
+      display: inline-block;
+      padding: 5px 30px;
+      background: var(--primary);
+      color: #fff;
+      border: none;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: 400;
+      transition: all 0.3s;
+      cursor: pointer;
+    }
+    
+    .btn:hover {
+      background: #3a56d4;
+      transform: translateY(-3px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    }
+    
+    .btn-outline {
+      background: transparent;
+      border: 2px solid #fff;
+      margin-left: 15px;
+    }
+    
+    .btn-outline:hover {
+      background: #fff;
+      color: var(--primary);
+    }
+    
+    /* Courses Section */
+    .section {
+      padding: 80px 0;
+    }
+    
+    .section-title {
+      text-align: center;
+      margin-bottom: 50px;
+    }
+    
+    .section-title h2 {
+      font-size: 2.5rem;
+      font-family: var(--font-heading);
+      color: var(--dark);
+      margin-bottom: 15px;
+    }
+    
+    .section-title p {
+      color: var(--gray);
+      max-width: 700px;
+      margin: 0 auto;
+    }
+    
+    .courses-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 30px;
+    }
+    
+    .course-card {
+      background: #fff;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s;
+    }
+    
+    .course-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+    }
+    
+    .course-img {
+      height: 200px;
+      overflow: hidden;
+
+    }
+    
+    .course-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s;
+    }
+    
+    .course-card:hover .course-img img {
+      transform: scale(1.1);
+    }
+    
+    .course-content {
+      padding: 20px;
+    }
+    
+    .course-category {
+      display: inline-block;
+      padding: 5px 15px;
+      background: #fff;
+      color: var(--primary);
+      border-radius: 80px;
+      font-size: 1.0rem;
+      font-weight: 600;
+      margin-bottom: 10px;
+    }
+    
+    .course-title {
+      font-size: 0.9rem;
+      margin-bottom: 10px;
+      font-family: var(--font-heading);
+    }
+    
+    .course-meta {
+      display: flex;
+      justify-content: space-between;
+      color: var(--gray);
+      font-size: 0.9rem;
+      margin-bottom: 15px;
+    }
+    
+    .course-price {
+      font-weight: 700;
+      color: var(--primary);
+      font-size: 1.2rem;
+       align-items: center;
+      text-align: center;
+    }
+    
+    /* Features Section */
+    .features {
+      background: #f8f9fa;
+    }
+    
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 30px;
+    }
+    
+    .feature-card {
+      text-align: center;
+      padding: 30px 20px;
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+      transition: all 0.3s;
+    }
+    
+    .feature-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+    }
+    
+    .feature-icon {
+      width: 70px;
+      height: 70px;
+      background: var(--primary);
+      color: #fff;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.8rem;
+      margin: 0 auto 20px;
+    }
+    
+    .feature-title {
+      font-size: 1.3rem;
+      margin-bottom: 15px;
+      font-family: var(--font-heading);
+    }
+    
+    /* Testimonials */
+    .testimonials {
+      background: linear-gradient(rgba(74, 107, 255, 0.9), rgba(74, 107, 255, 0.9)), url('img/pattern.png');
+      color: #fff;
+    }
+    
+    .testimonial-slider {
+      max-width: 800px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    
+    .testimonial-item {
+      padding: 0 20px;
+    }
+    
+    .testimonial-text {
+      font-size: 1.2rem;
+      font-style: italic;
+      margin-bottom: 30px;
+      position: relative;
+    }
+    
+    .testimonial-text::before, .testimonial-text::after {
+      content: '"';
+      font-size: 3rem;
+      color: rgba(255, 255, 255, 0.2);
+      position: absolute;
+    }
+    
+    .testimonial-text::before {
+      top: -20px;
+      left: -15px;
+    }
+    
+    .testimonial-text::after {
+      bottom: -40px;
+      right: -15px;
+    }
+    
+    .testimonial-author {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .author-img {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      overflow: hidden;
+      margin-right: 15px;
+    }
+    
+    .author-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    
+    .author-info h4 {
+      font-family: var(--font-heading);
+      margin-bottom: 5px;
+    }
+    
+    .author-info p {
+      opacity: 0.8;
+      font-size: 0.9rem;
+    }
+    
+    /* CTA Section */
+    .cta {
+      background: var(--secondary);
+      color: #fff;
+      text-align: center;
+      padding: 60px 0;
+    }
+    
+    .cta h2 {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+      font-family: var(--font-heading);
+    }
+    
+    .cta p {
+      max-width: 700px;
+      margin: 0 auto 30px;
+      font-size: 1.1rem;
+    }
+    
+    /* Footer */
+    .footer {
+      background: var(--dark);
+      color: #fff;
+      padding: 60px 0 0;
+    }
+    
+    .footer-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 30px;
+      margin-bottom: 40px;
+    }
+    
+    .footer-logo {
+      height: 50px;
+      margin-bottom: 20px;
+    }
+    
+    .footer-heading {
+      font-size: 1.3rem;
+      margin-bottom: 20px;
+      font-family: var(--font-heading);
+      position: relative;
+      padding-bottom: 10px;
+    }
+    
+    .footer-heading::after {
+      content: '';
+      position: absolute;
+      width: 50px;
+      height: 2px;
+      background: var(--primary);
+      bottom: 0;
+      left: 0;
+    }
+    
+    .footer-links {
+      list-style: none;
+    }
+    
+    .footer-links li {
+      margin-bottom: 10px;
+    }
+    
+    .footer-link {
+      color: rgba(255, 255, 255, 0.7);
+      text-decoration: none;
+      transition: all 0.3s;
+      display: flex;
+      align-items: center;
+    }
+    
+    .footer-link i {
+      margin-right: 10px;
+      width: 20px;
+      text-align: center;
+    }
+    
+    .footer-link:hover {
+      color: #fff;
+      padding-left: 5px;
+    }
+    
+    .footer-bottom {
+      text-align: center;
+      padding: 20px 0;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      font-size: 0.9rem;
+      color: rgba(255, 255, 255, 0.5);
+    }
+    
+    /* Responsive */
+    @media (max-width: 992px) {
+      .nav-menu {
+        position: fixed;
+        top: 80px;
+        left: -100%;
+        width: 100%;
+        height: calc(100vh - 80px);
+        background: #fff;
+        flex-direction: column;
+        align-items: center;
+        padding-top: 40px;
+        transition: all 0.5s;
+      }
+      
+      .nav-menu.active {
+        left: 0;
+      }
+      
+      .nav-item {
+        margin: 15px 0;
+      }
+      
+      .menu-toggle {
+        display: block;
+      }
+      
+      .dropdown-menu {
+        position: static;
+        opacity: 1;
+        visibility: visible;
+        box-shadow: none;
+        display: none;
+      }
+      
+      .nav-item:hover .dropdown-menu {
+        display: block;
+      }
+      
+      .social-links {
+        margin-left: 0;
+        margin-top: 30px;
+        justify-content: center;
+      }
+      
+      .hero h1 {
+        font-size: 2.5rem;
+      }
+    }
+    
+    @media (max-width: 768px) {
+      .hero {
+        height: 70vh;
+      }
+      
+      .hero h1 {
+        font-size: 2rem;
+      }
+      
+      .btn {
+        display: block;
+        width: 80%;
+        margin: 0 auto 15px;
+      }
+      
+      .btn-outline {
+        margin-left: auto;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="navbar" id="main-nav">
+    <div class="container navbar-container">
+      <a href="/1_index.html">
+        <img src="img/logo-3.png" alt="789 Сургалтын төв" class="logo">
+      </a>
+      
+      <button class="menu-toggle" aria-label="Toggle menu">
+        <i class="fas fa-bars"></i>
+      </button>
+      
+      <div class="nav-links">
+        <ul class="nav-menu">
+          <li class="nav-item">
+            <a class="nav-link current" href="/1_index.html">Нүүр</a>
+          </li>
+
+          <li class="nav-item dropdown">
+            <a class="nav-link" href="#">Хичээл <i class="fas fa-chevron-down"></i></a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="/2_0_0_math_lesson.html">Математик</a></li>
+              <li><a class="dropdown-item" href="/2_1_0_Physics_lesson.html">Физик</a></li>
+              <li><a class="dropdown-item" href="/2_2_0_Chemistry_lesson.html">Хими</a></li>
+              <li><a class="dropdown-item" href="/2_3_0_Biology_lesson.html">Биологи</a></li>
+            </ul>
+          </li>
+          
+          <li class="nav-item dropdown">
+            <a class="nav-link" href="#">Сургалт <i class="fas fa-chevron-down"></i></a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="/3_1_0_Tankhim_Surgalt.html">Танхим</a></li>
+              <li><a class="dropdown-item" href="/3_1_1_Onlaine_Surgalt.html">Онлайна</a></li>
+              <li><a class="dropdown-item" href="/3_1_2_Gantsaarchilsan_Surgalt.html">Ганцаарчилсан</a></li>
+            </ul>
+          </li>
+
+          <li class="nav-item dropdown">
+            <a class="nav-link" href="/4_1_0_math_book.html">Ном</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="/3_1_3_busad_surgalt.html">Бусад</a>
+          </li>
+         
+          <li class="nav-item">
+            <a class="nav-link btn btn-login" href="#">Нэвтрэх | Бүртгүүлэх</a>
+          </li>
+        </ul>
+        
+        <div class="social-links">
+          <a href="https://www.facebook.com/profile.php?id=100086311397194" target="_blank" class="social-link" aria-label="Facebook">
+            <i class="fab fa-facebook-f"></i>
+          </a>
+          <a href="#" target="_blank" class="social-link" aria-label="Twitter">
+            <i class="fab fa-twitter"></i>
+          </a>
+          <a href="#" target="_blank" class="social-link" aria-label="Instagram">
+            <i class="fab fa-instagram"></i>
+          </a>
+          <a href="https://www.youtube.com/channel/UCfeJLkLh7OYsgbcMLXqUCnA" target="_blank" class="social-link" aria-label="YouTube">
+            <i class="fab fa-youtube"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Courses Section -->
+  <section class="section">
+    <div class="container">
+      <div class="section-title">
+        <h2>Химийн видео хичээлүүд</h2>
+        <p>Манай мэргэшсэн багш нарын зааж буй өндөр чанартай хичээлүүд</p>
+      </div>
+      
+      
+      <div class="courses-grid">
+        <div class="course-card">
+          <div class="course-img">
+            <img src="/img/math/2.jpg" alt="Математик">
+          </div>
+          <div class="course-content">
+            <span class="course-category">Арифметик</span>
+            <h5 class="course-title">Тоон илэрхийлэл, зэрэг, язгуур</h5>
+            <div class="course-meta">
+              <span>Хичээлийн тоо 6+ </span>
+             
+            </div>
+            <div class="course-price">₮50,000</div>
+            <div class="course-price"> <a href="/2_0_1_aripmitik.html" class="btn">Үзэх</a></div>
+          </div>
+        </div>
+        
+        <div class="course-card">
+          <div class="course-img">
+            <img src="/img/math/3.jpg" alt="Математик">
+          </div>
+          <div class="course-content">
+            <span class="course-category">Алгебр</span>
+            <h3 class="course-title">Математик - Бүрэн хөтөлбөр</h3>
+            <div class="course-meta">
+              <span>Хичээлийн тоо 6+ </span>
+             
+            </div>
+            <div class="course-price">₮50,000</div>
+           <div class="course-price"> <a href="/2_0_2_algeber.html" class="btn">Үзэх</a></div>
+          </div>
+        </div>
+
+        <div class="course-card">
+          <div class="course-img">
+            <img src="/img/math/4.jpg" alt="Математик">
+          </div>
+          <div class="course-content">
+            <span class="course-category">Олонлог</span>
+            <h3 class="course-title">Математик - Бүрэн хөтөлбөр</h3>
+            <div class="course-meta">
+              <span>Хичээлийн тоо 6+ </span>
+             
+            </div>
+            <div class="course-price">₮50,000</div>
+            <div class="course-price"> <a href="2_0_3_olonlog.html" class="btn">Үзэх</a></div>
+          </div>
+        </div>
+
+
+        <div class="course-card">
+          <div class="course-img">
+            <img src="/img/math/5.jpg" alt="Математик">
+          </div>
+          <div class="course-content">
+            <span class="course-category">Олон гишүүнт</span>
+            <h3 class="course-title">Математик - Бүрэн хөтөлбөр</h3>
+            <div class="course-meta">
+              <span>Хичээлийн тоо 6+ </span>
+             
+            </div>
+            <div class="course-price">₮50,000</div>
+             <div class="course-price"> <a href="2_0_4_olon_gishvvnt.html" class="btn">Үзэх</a></div>
+          </div>
+        </div>
+
+
+
+
+
+
+      </div>
+    </div>
+  </section>
+
+
+
+
+  <!-- CTA Section -->
+  <section class="cta">
+    <div class="container">
+      <h2>Бидэнтэй нэгдээрэй</h2>
+      <p>ЭЕШ-д бэлтгэхээс эхлээд сурч буй хичээлээ гүнзгий ойлгох хүртэл бид танд туслах болно.</p>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-container">
+        <div class="footer-col">
+           <h3 class="footer-heading">Бидний зорилого</h3>
+          <p>
+            Бид математик, физик, хими, биологийн цахим хичээл нь оюутнуудад шинжлэх ухааны үндсийг ойлгуулж, логик сэтгэлгээ, практик чадварыг хөгжүүлэхэд чиглэсэн бөгөөд ирээдүйн мэргэжилтнүүдийг бэлтгэх зорилготой...
+          </p>
+        </div>
+        
+        <div class="footer-col">
+          <h3 class="footer-heading">Холбоо барих</h3>
+          <ul class="footer-links">
+            <li>
+              <a href="tel:+976 9665-6003" class="footer-link">
+                <i class="fas fa-phone-alt"></i> +976 9665-6003
+              </a>
+            </li>
+            <li>
+              <a href="mailto:msurguul@gmail.com" class="footer-link">
+                <i class="fas fa-envelope"></i> msurguul@gmail.com
+              </a>
+            </li>
+            <li>
+              <a href="https://www.facebook.com/profile.php?viewas=100000686899395&id=100086311397194" target="_blank" class="footer-link">
+                <i class="fab fa-facebook-f"></i> Openschool.mn
+      
+              </a>
+            </li>
+          </ul>
+        </div>
+        
+      
+        
+        <div class="footer-col">
+          <h3 class="footer-heading">Хаяг</h3>
+          <address>
+            <a href="#" class="footer-link">
+              <i class="fas fa-map-marker-alt"></i> 
+              Улаанбаатар хот, Сүхбаатар дүүрэг 11-р хороолол, M.A.M сентер, 5 давхар, 501 тоот. 
+            </a>
+          </address>
+        </div>
+      </div>
+      
+      <div class="footer-bottom">
+        <p>&copy; 2023 Open school Сургалтын төв. Бүх эрх хуулиар хамгаалагдсан.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Mobile menu toggle
+      const menuToggle = document.querySelector('.menu-toggle');
+      const navMenu = document.querySelector('.nav-menu');
+      
+      menuToggle.addEventListener('click', () => {
+        navMenu.classList.toggle('active');
+        const icon = menuToggle.querySelector('i');
+        if (navMenu.classList.contains('active')) {
+          icon.classList.remove('fa-bars');
+          icon.classList.add('fa-times');
+        } else {
+          icon.classList.remove('fa-times');
+          icon.classList.add('fa-bars');
+        }
+      });
+      
+      // Smooth scrolling for anchor links
+      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+          e.preventDefault();
+          const target = document.querySelector(this.getAttribute('href'));
+          if (target) {
+            window.scrollTo({
+              top: target.offsetTop - 80,
+              behavior: 'smooth'
+            });
+          }
+        });
+      });
+      
+      // Sticky navbar on scroll
+      window.addEventListener('scroll', function() {
+        const navbar = document.getElementById('main-nav');
+        if (window.scrollY > 100) {
+          navbar.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.1)';
+        } else {
+          navbar.style.boxShadow = 'none';
+        }
+      });
+    });
+  </script>
+</body>
+</html>

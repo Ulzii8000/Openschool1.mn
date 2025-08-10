@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="mn">
+<head>
+  <!-- Previous head content remains the same -->
+  <style>
+    /* Previous styles remain the same until the Book Section */
+
+    /* Enhanced Book Section */
+    .books-section {
+      background-color: #f9fafc;
+      padding: 80px 0;
+    }
+    
+    .books-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+    
+    .section-header {
+      text-align: center;
+      margin-bottom: 50px;
+    }
+    
+    .section-title {
+      font-size: 2.5rem;
+      color: #2c3e50;
+      margin-bottom: 15px;
+      font-family: 'Montserrat', sans-serif;
+      position: relative;
+      display: inline-block;
+    }
+    
+    .section-title:after {
+      content: '';
+      position: absolute;
+      width: 50%;
+      height: 3px;
+      background: #4a6bff;
+      bottom: -10px;
+      left: 25%;
+    }
+    
+    .section-subtitle {
+      color: #6c757d;
+      font-size: 1.1rem;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+    
+    .books-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+      gap: 30px;
+      margin-top: 40px;
+    }
+    
+    .book-card {
+      background: #fff;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+      transition: all 0.3s ease;
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .book-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+    }
+    
+    .book-badge {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      background: #ff6b6b;
+      color: white;
+      padding: 5px 15px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      z-index: 2;
+    }
+    
+    .book-image {
+      position: relative;
+      height: 250px;
+      overflow: hidden;
+      background: #f5f7fa;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .book-image img {
+      width: 60%;
+      height: auto;
+      object-fit: contain;
+      transition: transform 0.5s ease;
+    }
+    
+    .book-card:hover .book-image img {
+      transform: scale(1.05);
+    }
+    
+    .book-content {
+      padding: 25px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .book-title {
+      font-size: 1.4rem;
+      margin-bottom: 10px;
+      color: #2c3e50;
+      font-family: 'Montserrat', sans-serif;
+      line-height: 1.3;
+    }
+    
+    .book-subtitle {
+      color: #6c757d;
+      font-size: 0.95rem;
+      margin-bottom: 15px;
+    }
+    
+    .book-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 15px;
+    }
+    
+    .meta-item {
+      display: flex;
+      align-items: center;
+      color: #6c757d;
+      font-size: 0.85rem;
+      background: #f1f3f8;
+      padding: 5px 10px;
+      border-radius: 5px;
+    }
+    
+    .meta-item i {
+      margin-right: 5px;
+      color: #4a6bff;
+      font-size: 0.9rem;
+    }
+    
+    .book-description {
+      margin-bottom: 20px;
+      color: #555;
+      font-size: 0.95rem;
+      flex: 1;
+    }
+    
+    .book-features {
+      list-style: none;
+      margin: 10px 0;
+      padding-left: 0;
+    }
+    
+    .book-features li {
+      padding: 8px 0;
+      position: relative;
+      padding-left: 25px;
+      font-size: 0.9rem;
+    }
+    
+    .book-features li:before {
+      content: '\f00c';
+      font-family: 'Font Awesome 6 Free';
+      font-weight: 900;
+      color: #4a6bff;
+      position: absolute;
+      left: 0;
+    }
+    
+    .book-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 20px;
+      padding-top: 15px;
+      border-top: 1px solid #eee;
+    }
+    
+    .book-price {
+      font-weight: 700;
+      color: #4a6bff;
+      font-size: 1.5rem;
+      font-family: 'Montserrat', sans-serif;
+    }
+    
+    .book-price span {
+      font-size: 0.9rem;
+      color: #6c757d;
+      text-decoration: line-through;
+      margin-left: 5px;
+    }
+    
+    .btn-book {
+      padding: 10px 20px;
+      background: #4a6bff;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.3s;
+      display: inline-flex;
+      align-items: center;
+      font-size: 0.9rem;
+    }
+    
+    .btn-book i {
+      margin-left: 8px;
+    }
+    
+    .btn-book:hover {
+      background: #3a56d4;
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(74, 107, 255, 0.3);
+    }
+    
+    .view-all {
+      text-align: center;
+      margin-top: 40px;
+    }
+    
+    .btn-view {
+      padding: 12px 30px;
+      background: transparent;
+      color: #4a6bff;
+      border: 2px solid #4a6bff;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.3s;
+      display: inline-block;
+    }
+    
+    .btn-view:hover {
+      background: #4a6bff;
+      color: white;
+    }
+    
+    /* Book Detail Modal */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 2000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgba(0,0,0,0.8);
+    }
+    
+    .modal-content {
+      background-color: #fefefe;
+      margin: 5% auto;
+      padding: 30px;
+      border-radius: 10px;
+      width: 80%;
+      max-width: 900px;
+      box-shadow: 0 5px 30px rgba(0,0,0,0.3);
+      position: relative;
+      animation: modalopen 0.5s;
+    }
+    
+    @keyframes modalopen {
+      from {opacity: 0; transform: translateY(-50px);}
+      to {opacity: 1; transform: translateY(0);}
+    }
+    
+    .close-modal {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      color: #aaa;
+      font-size: 28px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    
+    .close-modal:hover {
+      color: #333;
+    }
+    
+    .modal-book {
+      display: flex;
+      gap: 30px;
+    }
+    
+    .modal-book-image {
+      flex: 1;
+      min-width: 300px;
+      background: #f5f7fa;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 30px;
+    }
+    
+    .modal-book-image img {
+      max-width: 100%;
+      height: auto;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    }
+    
+    .modal-book-content {
+      flex: 2;
+    }
+    
+    .modal-book-title {
+      font-size: 2rem;
+      margin-bottom: 15px;
+      color: #2c3e50;
+    }
+    
+    .modal-book-author {
+      color: #6c757d;
+      margin-bottom: 20px;
+      font-size: 1.1rem;
+    }
+    
+    .modal-book-description {
+      margin-bottom: 20px;
+      line-height: 1.7;
+    }
+    
+    .modal-book-features {
+      margin-bottom: 25px;
+    }
+    
+    .modal-book-features h4 {
+      margin-bottom: 15px;
+      color: #2c3e50;
+      font-size: 1.2rem;
+    }
+    
+    .modal-book-features ul {
+      list-style-type: none;
+    }
+    
+    .modal-book-features li {
+      padding: 8px 0;
+      position: relative;
+      padding-left: 30px;
+    }
+    
+    .modal-book-features li:before {
+      content: '\f058';
+      font-family: 'Font Awesome 6 Free';
+      font-weight: 900;
+      color: #4a6bff;
+      position: absolute;
+      left: 0;
+    }
+    
+    .modal-book-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 30px;
+      padding-top: 20px;
+      border-top: 1px solid #eee;
+    }
+    
+    .modal-book-price {
+      font-size: 1.8rem;
+      color: #4a6bff;
+      font-weight: 700;
+    }
+    
+    .btn-modal {
+      padding: 12px 30px;
+      font-size: 1rem;
+    }
+    
+    /* Responsive */
+    @media (max-width: 992px) {
+      .books-grid {
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      }
+      
+      .modal-book {
+        flex-direction: column;
+      }
+      
+      .modal-book-image {
+        min-width: auto;
+      }
+    }
+    
+    @media (max-width: 768px) {
+      .section-title {
+        font-size: 2rem;
+      }
+      
+      .book-card {
+        max-width: 100%;
+      }
+      
+      .modal-content {
+        width: 95%;
+        padding: 20px;
+      }
+      
+      .modal-book-title {
+        font-size: 1.6rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Previous content remains the same until the Book Section -->
+
+  <!-- Enhanced Book Section -->
+  <section class="books-section">
+    <div class="books-container">
+      <div class="section-header">
+        <h2 class="section-title">Бидний бүтээлүүд</h2>
+        <p class="section-subtitle">Манай мэргэшсэн багш нарын бэлтгэсэн номнууд</p>
+      </div>
+      
+      <div class="books-grid">
+        <!-- Book 1 -->
+        <div class="book-card">
+          <div class="book-image">
+            <span class="book-badge">Шинээр ирсэн</span>
+            <img src="img/book1.jpg" alt="Математикийн ЭЕШ бодлого, видео бодолт">
+          </div>
+          <div class="book-content">
+            <h3 class="book-title">Математикийн ЭЕШ бодлого, видео бодолт</h3>
+            <p class="book-subtitle">2006-2024 оны бүх бодлогуудын бодолт, томьёоны цуглуулга</p>
+            
+            <div class="book-meta">
+              <div class="meta-item">
+                <i class="fas fa-book-open"></i> 360 хуудас
+              </div>
+              <div class="meta-item">
+                <i class="fas fa-layer-group"></i> A4 хэмжээ
+              </div>
+            </div>
+            
+            <p class="book-description">Математикийн эеш бодлого, видео бодолт, томьёо номонд томьёо болон 2006-2024 оны математикийн элсэлтийн ерөнхий шалгалтын бүх бодлого</p>
+            
+            <div class="book-footer">
+              <div class="book-price">₮30,000</div>
+              <a href="#" class="btn-book" onclick="openModal('modal1')">Дэлгэрэнгүй <i class="fas fa-arrow-right"></i></a>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Book 2 -->
+        <div class="book-card">
+          <div class="book-image">
+            <span class="book-badge">Хамгийн их зарагдсан</span>
+            <img src="img/book2.jpg" alt="Физикийн ЭЕШ бодлого, бодолт">
+          </div>
+          <div class="book-content">
+            <h3 class="book-title">Физикийн ЭЕШ бодлого, бодолт</h3>
+            <p class="book-subtitle">2010-2024 оны физикийн ЭЕШ-ийн бодлогууд</p>
+            
+            <div class="book-meta">
+              <div class="meta-item">
+                <i class="fas fa-book-open"></i> 280 хуудас
+              </div>
+              <div class="meta-item">
+                <i class="fas fa-layer-group"></i> A4 хэмжээ
+              </div>
+            </div>
+            
+            <p class="book-description">Физикийн эеш бодлого, бодолт номонд 2010-2024 оны физикийн элсэлтийн ерөнхий шалгалтын бүх бодлого</p>
+            
+            <div class="book-footer">
+              <div class="book-price">₮28,000</div>
+              <a href="#" class="btn-book" onclick="openModal('modal2')">Дэлгэрэнгүй <i class="fas fa-arrow-right"></i></a>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Book 3 -->
+        <div class="book-card">
+          <div class="book-image">
+            <img src="img/book3.jpg" alt="Химийн ЭЕШ бодлого, бодолт">
+          </div>
+          <div class="book-content">
+            <h3 class="book-title">Химийн ЭЕШ бодлого, бодолт</h3>
+            <p class="book-subtitle">2010-2024 оны химийн ЭЕШ-ийн бодлогууд</p>
+            
+            <div class="book-meta">
+              <div class="meta-item">
+                <i class="fas fa-book-open"></i> 240 хуудас
+              </div>
+              <div class="meta-item">
+                <i class="fas fa-layer-group"></i> A4 хэмжээ
+              </div>
+            </div>
+            
+            <p class="book-description">Химийн эеш бодлого, бодолт номонд 2010-2024 оны химийн элсэлтийн ерөнхий шалгалтын бүх бодлого</p>
+            
+            <div class="book-footer">
+              <div class="book-price">₮25,000</div>
+              <a href="#" class="btn-book" onclick="openModal('modal3')">Дэлгэрэнгүй <i class="fas fa-arrow-right"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="view-all">
+        <a href="/4_1_0_math_book.html" class="btn-view">Бүх номнуудыг харах</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Book Detail Modal 1 -->
+  <div id="modal1" class="modal">
+    <div class="modal-content">
+      <span class="close-modal" onclick="closeModal('modal1')">&times;</span>
+      <div class="modal-book">
+        <div class="modal-book-image">
+          <img src="img/book1.jpg" alt="Математикийн ЭЕШ бодлого, видео бодолт">
+        </div>
+        <div class="modal-book-content">
+          <h2 class="modal-book-title">Математикийн ЭЕШ бодлого, видео бодолт</h2>
+          <p class="modal-book-author">III дахь хэвлэл</p>
+          
+          <div class="book-meta">
+            <div class="meta-item">
+              <i class="fas fa-book-open"></i> 360 хуудас
+            </div>
+            <div class="meta-item">
+              <i class="fas fa-layer-group"></i> A4 хэмжээтэй
+            </div>
+            <div class="meta-item">
+              <i class="fas fa-palette"></i> Өнгөт хэвлэл
+            </div>
+            <div class="meta-item">
+              <i class="fas fa-truck"></i> Хүргэлт үнэгүй
+            </div>
+          </div>
+          
+          <p class="modal-book-description">
+            Сайн байна уу? Номныхоо III дахь хэвлэлтээрэй уулзаж байгаад баяртай байна. Энэхүү номыг ахлах ангийн сурагчид болон математикийн ЭЕШ-д бэлтгэж байгаа сурагчдад зориулав.
+          </p>
+          
+          <div class="modal-book-features">
+            <h4>Номын онцлог</h4>
+            <ul>
+              <li>Математикийн эеш бодлого, видео бодолт, томьёо номонд томьёо болон 2006-2024 оны математикийн элсэлтийн ерөнхий шалгалтын бүх бодлого</li>
+              <li>Нэгдүгээр хэсэгт математикийн томьёонууд</li>
+              <li>Хоёрдугаар хэсэгт 23 сэдвийн хүрээнд 2006-2013 оны математикийн ЭЕШ-н бодлогуудыг ангилж оруулсан</li>
+              <li>Гуравдугаар хэсэгт 2014-2025 оны математикийн ЭЕШ-н бодлогууд болон А хувилбар заавар, бодолтын хамт оруулсан</li>
+              <li>Нэмэлт сэдвийн бодлогуудыг тусгайлан нэмж оруулсан</li>
+              <li>Бүх бодлогуудад дэлгэрэнгүй бодолт, тайлбар</li>
+            </ul>
+          </div>
+          
+          <div class="modal-book-footer">
+            <div class="modal-book-price">Үнэ: ₮30,000</div>
+            <a href="#" class="btn-book btn-modal">Худалдаж авах <i class="fas fa-shopping-cart"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Book Detail Modal 2 -->
+  <div id="modal2" class="modal">
+    <div class="modal-content">
+      <span class="close-modal" onclick="closeModal('modal2')">&times;</span>
+      <div class="modal-book">
+        <div class="modal-book-image">
+          <img src="img/book2.jpg" alt="Физикийн ЭЕШ бодлого, бодолт">
+        </div>
+        <div class="modal-book-content">
+          <h2 class="modal-book-title">Физикийн ЭЕШ бодлого, бодолт</h2>
+          <p class="modal-book-author">II дахь хэвлэл</p>
+          
+          <div class="book-meta">
+            <div class="meta-item">
+              <i class="fas fa-book-open"></i> 280 хуудас
+            </div>
+            <div class="meta-item">
+              <i class="fas fa-layer-group"></i> A4 хэмжээтэй
+            </div>
+            <div class="meta-item">
+              <i class="fas fa-palette"></i> Өнгөт хэвлэл
+            </div>
+            <div class="meta-item">
+              <i class="fas fa-truck"></i> Хүргэлт үнэгүй
+            </div>
+          </div>
+          
+          <p class="modal-book-description">
+            Физикийн ЭЕШ-д бэлтгэгчдэд зориулсан энэхүү ном нь 2010-2024 оны физикийн элсэлтийн ерөнхий шалгалтын бүх бодлогуудыг агуулсан бөгөөд бүх бодлогуудад дэлгэрэнгүй бодолт, тайлбар оруулсан.
+          </p>
+          
+          <div class="modal-book-features">
+            <h4>Номын онцлог</h4>
+            <ul>
+              <li>Физикийн эеш бодлого, бодолт номонд 2010-2024 оны физикийн элсэлтийн ерөнхий шалгалтын бүх бодлого</li>
+              <li>Нэгдүгээр хэсэгт физикийн томьёонууд</li>
+              <li>Хоёрдугаар хэсэгт 15 сэдвийн хүрээнд 2010-2013 оны физикийн ЭЕШ-н бодлогуудыг ангилж оруулсан</li>
+              <li>Гуравдугаар хэсэгт 2014-2025 оны физикийн ЭЕШ-н бодлогууд болон А хувилбар заавар, бодолтын хамт оруулсан</li>
+              <li>Бүх бодлогуудад дэлгэрэнгүй бодолт, тайлбар</li>
+              <li>Туршилтын даалгавруудын шийдэл</li>
+            </ul>
+          </div>
+          
+          <div class="modal-book-footer">
+            <div class="modal-book-price">Үнэ: ₮28,000</div>
+            <a href="#" class="btn-book btn-modal">Худалдаж авах <i class="fas fa-shopping-cart"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Book Detail Modal 3 -->
+  <div id="modal3" class="modal">
+    <div class="modal-content">
+      <span class="close-modal" onclick="closeModal('modal3')">&times;</span>
+      <div class="modal-book">
+        <div class="modal-book-image">
+          <img src="img/book3.jpg" alt="Химийн ЭЕШ бодлого, бодолт">
+        </div>
+        <div class="modal-book-content">
+          <h2 class="modal-book-title">Химийн ЭЕШ бодлого, бодолт</h2>
+          <p class="modal-book-author">II дахь хэвлэл</p>
+          
+          <div class="book-meta">
+            <div class="meta-item">
+              <i class="fas fa-book-open"></i> 240 хуудас
+            </div>
+            <div class="meta-item">
+              <i class="fas fa-layer-group"></i> A4 хэмжээтэй
+            </div>
+            <div class="meta-item">
+              <i class="fas fa-palette"></i> Өнгөт хэвллэл
+            </div>
+            <div class="meta-item">
+              <i class="fas fa-truck"></i> Хүргэлт үнэгүй
+            </div>
+          </div>
+          
+          <p class="modal-book-description">
+            Химийн ЭЕШ-д бэлтгэгчдэд зориулсан энэхүү ном нь 2010-2024 оны химийн элсэлтийн ерөнхий шалгалтын бүх бодлогуудыг агуулсан бөгөөд бүх бодлогуудад дэлгэрэнгүй бодолт, тайлбар оруулсан.
+          </p>
+          
+          <div class="modal-book-features">
+            <h4>Номын онцлог</h4>
+            <ul>
+              <li>Химийн эеш бодлого, бодолт номонд 2010-2024 оны химийн элсэлтийн ерөнхий шалгалтын бүх бодлого</li>
+              <li>Нэгдүгээр хэсэгт химийн томьёонууд</li>
+              <li>Хоёрдугаар хэсэгт 12 сэдвийн хүрээнд 2010-2013 оны химийн ЭЕШ-н бодлогуудыг ангилж оруулсан</li>
+              <li>Гуравдугаар хэсэгт 2014-2025 оны химийн ЭЕШ-н бодлогууд болон А хувилбар заавар, бодолтын хамт оруулсан</li>
+              <li>Бүх бодлогуудад дэлгэрэнгүй бодолт, тайлбар</li>
+              <li>Туршилтын даалгавруудын шийдэл</li>
+            </ul>
+          </div>
+          
+          <div class="modal-book-footer">
+            <div class="modal-book-price">Үнэ: ₮25,000</div>
+            <a href="#" class="btn-book btn-modal">Худалдаж авах <i class="fas fa-shopping-cart"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Previous content after Book Section remains the same -->
+
+  <script>
+    // Previous JavaScript remains the same
+    
+    // Modal functions
+    function openModal(modalId) {
+      document.getElementById(modalId).style.display = 'block';
+      document.body.style.overflow = 'hidden';
+    }
+    
+    function closeModal(modalId) {
+      document.getElementById(modalId).style.display = 'none';
+      document.body.style.overflow = 'auto';
+    }
+    
+    // Close modal when clicking outside of it
+    window.onclick = function(event) {
+      if (event.target.className === 'modal') {
+        event.target.style.display = 'none';
+        document.body.style.overflow = 'auto';
+      }
+    }
+  </script>
+</body>
+</html>
